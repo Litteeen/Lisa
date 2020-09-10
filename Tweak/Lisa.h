@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import <Cephei/HBPreferences.h>
+#import <AudioToolbox/AudioServices.h>
 #import <dlfcn.h>
 
 HBPreferences* preferences;
@@ -11,6 +12,7 @@ BOOL isDNDActive = NO;
 extern BOOL enabled;
 extern BOOL enableCustomizationSection;
 extern BOOL enableAnimationsSection;
+extern BOOL enableHapticFeedbackSection;
 
 // Customization
 BOOL onlyWhenDNDIsActiveSwitch = NO;
@@ -34,6 +36,10 @@ NSString* backgroundAlphaValue = @"1.0";
 // Animations
 BOOL lisaFadeOutAnimationSwitch = YES;
 NSString* lisaFadeOutAnimationValue = @"0.5";
+
+// Haptic Feedback
+BOOL hapticFeedbackSwitch = NO;
+NSString* hapticFeedbackStrengthValue = @"0";
 
 @interface CSCoverSheetViewController : UIViewController
 @end
@@ -65,6 +71,7 @@ NSString* lisaFadeOutAnimationValue = @"0.5";
 // control center indicator and unlock text for homebar devices
 @interface CSTeachableMomentsContainerView : UIView
 @property(nonatomic, strong, readwrite)UIView* controlCenterGrabberContainerView;
+@property(nonatomic, retain)UIView* callToActionLabelContainerView;
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 

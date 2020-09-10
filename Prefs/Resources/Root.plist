@@ -46,6 +46,16 @@
  			<key>LSASub</key>
  			<string>animationsSub</string>
  		</dict>
+		 <dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Haptic Feedback</string>
+ 			<key>detail</key>
+ 			<string>LSAHapticFeedbackSubPrefsListController</string>
+ 			<key>LSASub</key>
+ 			<string>hapticFeedbackSub</string>
+ 		</dict>
 
 		<dict>
 			<key>cell</key>

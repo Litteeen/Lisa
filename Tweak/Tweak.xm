@@ -3,6 +3,7 @@
 BOOL enabled;
 BOOL enableCustomizationSection;
 BOOL enableAnimationsSection;
+BOOL enableHapticFeedbackSection;
 
 // test notifications
 static BBServer* bbServer = nil;
@@ -155,11 +156,11 @@ void LSATestBanner() {
 
 %hook NCNotificationListView
 
-- (void)touchesBegan:(id)arg1 withEvent:(id)arg2 {
+- (void)touchesBegan:(id)arg1 withEvent:(id)arg2 { // tap to dismiss
 
     %orig;
 
-    if (!tapToDismissLisaSwitch) return;
+    if (!tapToDismissLisaSwitch || [lisaView isHidden]) return;
     if (lisaFadeOutAnimationSwitch) {
         [UIView animateWithDuration:[lisaFadeOutAnimationValue doubleValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [lisaView setAlpha:0.0];
@@ -167,9 +168,19 @@ void LSATestBanner() {
             [lisaView setHidden:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
         }];
+        if (enableHapticFeedbackSection && hapticFeedbackSwitch) {
+            if ([hapticFeedbackStrengthValue intValue] == 0) AudioServicesPlaySystemSound(1519);
+            else if ([hapticFeedbackStrengthValue intValue] == 1) AudioServicesPlaySystemSound(1520);
+            else if ([hapticFeedbackStrengthValue intValue] == 2) AudioServicesPlaySystemSound(1521);
+        }
     } else {
         [lisaView setHidden:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
+        if (enableHapticFeedbackSection && hapticFeedbackSwitch) {
+            if ([hapticFeedbackStrengthValue intValue] == 0) AudioServicesPlaySystemSound(1519);
+            else if ([hapticFeedbackStrengthValue intValue] == 1) AudioServicesPlaySystemSound(1520);
+            else if ([hapticFeedbackStrengthValue intValue] == 2) AudioServicesPlaySystemSound(1521);
+        }
     }
 
 }
@@ -383,17 +394,11 @@ void LSATestBanner() {
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide control center indicator and or unlock text
 
 	if ([notification.name isEqual:@"lisaHideElements"]) {
-        if (hideUnlockTextSwitch) {
-            SBUILegibilityLabel* label = MSHookIvar<SBUILegibilityLabel *>(self, "_callToActionLabel");
-            [label setHidden:YES];
-        }
         if (hideControlCenterIndicatorSwitch) [[self controlCenterGrabberContainerView] setHidden:YES];
+        if (hideUnlockTextSwitch) [[self callToActionLabelContainerView] setHidden:YES];
     } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
-        if (hideUnlockTextSwitch) {
-            SBUILegibilityLabel* label = MSHookIvar<SBUILegibilityLabel *>(self, "_callToActionLabel");
-            [label setHidden:NO];
-        }
         if (hideControlCenterIndicatorSwitch) [[self controlCenterGrabberContainerView] setHidden:NO];
+        if (hideUnlockTextSwitch) [[self callToActionLabelContainerView] setHidden:NO];
     }
 
 }
@@ -576,6 +581,7 @@ void LSATestBanner() {
     [preferences registerBool:&enabled default:nil forKey:@"Enabled"];
     [preferences registerBool:&enableCustomizationSection default:nil forKey:@"EnableCustomizationSection"];
     [preferences registerBool:&enableAnimationsSection default:nil forKey:@"EnableAnimationsSection"];
+    [preferences registerBool:&enableHapticFeedbackSection default:nil forKey:@"EnableHapticFeedbackSection"];
 
     // Customization
     [preferences registerBool:&onlyWhenDNDIsActiveSwitch default:NO forKey:@"onlyWhenDNDIsActive"];
@@ -599,6 +605,10 @@ void LSATestBanner() {
     // Animations
     [preferences registerBool:&lisaFadeOutAnimationSwitch default:YES forKey:@"lisaFadeOutAnimation"];
     [preferences registerObject:&lisaFadeOutAnimationValue default:@"0.5" forKey:@"lisaFadeOutAnimation"];
+
+    // Haptic Feedback
+    [preferences registerBool:&hapticFeedbackSwitch default:NO forKey:@"hapticFeedback"];
+    [preferences registerObject:&hapticFeedbackStrengthValue default:@"0" forKey:@"hapticFeedbackStrength"];
 
     if (enabled) {
         %init(Lisa);
