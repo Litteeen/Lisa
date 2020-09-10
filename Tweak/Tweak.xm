@@ -174,13 +174,13 @@ void LSATestBanner() {
 
     if (!tapToDismissLisaSwitch || [lisaView isHidden]) return;
     if (lisaFadeOutAnimationSwitch) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
         [UIView animateWithDuration:[lisaFadeOutAnimationValue doubleValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [lisaView setAlpha:0.0];
             [blurView setAlpha:0.0];
         } completion:^(BOOL finished) {
             [lisaView setHidden:YES];
             [blurView setHidden:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
         }];
         if (enableHapticFeedbackSection && hapticFeedbackSwitch) {
             if ([hapticFeedbackStrengthValue intValue] == 0) AudioServicesPlaySystemSound(1519);
@@ -216,7 +216,7 @@ void LSATestBanner() {
             [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
-        } else if (whenPlayingMusicSwitch && ([[%c(SBMediaController) sharedInstance] isPlaying] || [[%c(SBMediaController) sharedInstance] isPaused])) {
+        } else if (whenPlayingMusicSwitch && [[%c(SBMediaController) sharedInstance] isPlaying]) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [blurView setHidden:NO];
@@ -244,7 +244,7 @@ void LSATestBanner() {
             [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
-        } else if (whenPlayingMusicSwitch && ([[%c(SBMediaController) sharedInstance] isPlaying] || [[%c(SBMediaController) sharedInstance] isPaused])) {
+        } else if (whenPlayingMusicSwitch && [[%c(SBMediaController) sharedInstance] isPlaying]) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [blurView setHidden:NO];
@@ -564,6 +564,114 @@ void LSATestBanner() {
 
 %end
 
+%hook ComplicationsView
+
+- (id)initWithFrame:(CGRect)frame { // add notification observer
+
+    if (hideComplicationsSwitch) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaHideElements" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaUnhideElements" object:nil];
+    }
+
+	return %orig;
+
+}
+
+%new
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+
+	if ([notification.name isEqual:@"lisaHideElements"]) {
+        [self setHidden:YES];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
+
+}
+
+- (void)dealloc { // remove observer
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+	%orig;
+
+}
+
+%end
+
+%hook KAIBatteryPlatter
+
+- (id)initWithFrame:(CGRect)frame { // add notification observer
+
+    if (hideKaiSwitch) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaHideElements" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaUnhideElements" object:nil];
+    }
+
+	return %orig;
+
+}
+
+%new
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+
+	if ([notification.name isEqual:@"lisaHideElements"]) {
+        [self setHidden:YES];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
+
+}
+
+- (void)dealloc { // remove observer
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+	%orig;
+
+}
+
+%end
+
+%hook APEPlatter
+
+- (id)initWithFrame:(CGRect)frame { // add notification observer
+
+    if (hideAperioSwitch) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaHideElements" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaUnhideElements" object:nil];
+    }
+
+	return %orig;
+
+}
+
+%new
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+
+	if ([notification.name isEqual:@"lisaHideElements"]) {
+        [self setHidden:YES];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
+
+}
+
+- (void)dealloc { // remove observer
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+	%orig;
+
+}
+
+%end
+
 %end
 
 %group LisaData
@@ -648,6 +756,11 @@ void LSATestBanner() {
     [preferences registerBool:&hideUnlockTextSwitch default:YES forKey:@"hideUnlockText"];
     [preferences registerBool:&hideHomebarSwitch default:YES forKey:@"hideHomebar"];
     [preferences registerBool:&hidePageDotsSwitch default:YES forKey:@"hidePageDots"];
+
+    [preferences registerBool:&hideComplicationsSwitch default:YES forKey:@"hideComplications"];
+    [preferences registerBool:&hideKaiSwitch default:YES forKey:@"hideKai"];
+    [preferences registerBool:&hideAperioSwitch default:YES forKey:@"hideAperio"];
+
     [preferences registerBool:&disableTodaySwipeSwitch default:NO forKey:@"disableTodaySwipe"];
     [preferences registerBool:&disableCameraSwipeSwitch default:NO forKey:@"disableCameraSwipe"];
     [preferences registerBool:&blurredBackgroundSwitch default:NO forKey:@"blurredBackground"];

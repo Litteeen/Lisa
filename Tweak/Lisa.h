@@ -29,6 +29,11 @@ BOOL hideQuickActionsSwitch = YES;
 BOOL hideUnlockTextSwitch = YES;
 BOOL hideHomebarSwitch = YES;
 BOOL hidePageDotsSwitch = YES;
+
+BOOL hideComplicationsSwitch = YES;
+BOOL hideKaiSwitch = YES;
+BOOL hideAperioSwitch = YES;
+
 BOOL disableTodaySwipeSwitch = NO;
 BOOL disableCameraSwipeSwitch = NO;
 BOOL blurredBackgroundSwitch = NO;
@@ -92,13 +97,27 @@ NSString* hapticFeedbackStrengthValue = @"0";
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
+// complications
+@interface ComplicationsView : UIView
+- (void)receiveHideNotification:(NSNotification *)notification;
+@end
+
+// kai
+@interface KAIBatteryPlatter : UIView
+- (void)receiveHideNotification:(NSNotification *)notification;
+@end
+
+// aperio
+@interface APEPlatter : UIView
+- (void)receiveHideNotification:(NSNotification *)notification;
+@end
+
 @interface SBUILegibilityLabel : UIView
 @end
 
 @interface SBMediaController : NSObject
 + (id)sharedInstance;
 - (BOOL)isPlaying;
-- (BOOL)isPaused;
 @end
 
 // test notifications

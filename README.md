@@ -1,4 +1,5 @@
 # Lisa
+Customize your Lockscreen experience
 
 ## Installation
 1. Add this repository to your Package Manager: https://repo.litten.love

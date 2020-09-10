@@ -1,9 +1,12 @@
 Package: love.litten.lisa
-Name: Lisa
+Name: Lisa 💅🏻
 Depends: mobilesubstrate, preferenceloader, ws.hbang.common (>= 1.14), firmware (>= 13.0)
 Version: 1.0
 Architecture: iphoneos-arm
-Description: owo
-Maintainer: alexandra
-Author: alexandra
+Description: Customize your lockscreen experience
+Maintainer: Litten <hiya@litten.love>
+Author: Litten <hiya@litten.love>
 Section: Tweaks
+Depiction: https://repo.litten.love/depictions/lsa/index.html
+SileoDepiction: https://repo.litten.love/depictions/lsa/lsa.json
+Icon: https://repo.litten.love/depictions/lsa/assets/icon.png
