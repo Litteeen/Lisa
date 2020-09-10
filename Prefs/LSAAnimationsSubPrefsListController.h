@@ -1,33 +1,22 @@
 #import <Preferences/PSListController.h>
+#import <Preferences/PSListItemsController.h>
 #import <Preferences/PSSpecifier.h>
-#import <CepheiPrefs/HBRootListController.h>
+#import <CepheiPrefs/HBListController.h>
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Cephei/HBPreferences.h>
-#import <Cephei/HBRespringController.h>
-#import <spawn.h>
 #import <Preferences/PSControlTableCell.h>
 #import <Preferences/PSEditableTableCell.h>
 
 @interface LSAAppearanceSettings : HBAppearanceSettings
 @end
 
-@interface LSARootListController : HBRootListController {
-    UITableView * _table;
-}
+@interface LSAAnimationsSubPrefsListController : HBListController
 @property(nonatomic, retain)UISwitch* enableSwitch;
-@property (nonatomic, retain) UIView *headerView;
-@property (nonatomic, retain) UIImageView *headerImageView;
-@property (nonatomic, retain) UILabel *titleLabel;
-@property (nonatomic, retain) UIImageView *iconView;
+@property(nonatomic, retain)UILabel* titleLabel;
 - (void)toggleState;
 - (void)setEnableSwitchState;
-- (void)resetPrompt;
-- (void)resetPreferences;
-- (void)respring;
-- (void)respringUtil;
+- (void)toggleCellState:(BOOL)enable;
 - (void)setCellForRowAtIndexPath:(NSIndexPath *)indexPath enabled:(BOOL)enabled;
-- (void)testNotifications:(id)sender;
-- (void)testBanner:(id)sender;
 @end
 
 @interface PSEditableTableCell (Interface)

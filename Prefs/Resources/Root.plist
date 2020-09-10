@@ -36,6 +36,16 @@
  			<key>LSASub</key>
  			<string>customizationSub</string>
  		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Animations</string>
+ 			<key>detail</key>
+ 			<string>LSAAnimationsSubPrefsListController</string>
+ 			<key>LSASub</key>
+ 			<string>animationsSub</string>
+ 		</dict>
 
 		<dict>
 			<key>cell</key>
@@ -58,6 +68,14 @@
 			<string>Reset Preferences</string>
 			<key>action</key>
 			<string>resetPrompt</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Test Banner</string>
+			<key>action</key>
+			<string>testBanner:</string>
 		</dict>
 		<dict>
 			<key>cell</key>

@@ -10,6 +10,7 @@ BOOL isDNDActive = NO;
 
 extern BOOL enabled;
 extern BOOL enableCustomizationSection;
+extern BOOL enableAnimationsSection;
 
 // Customization
 BOOL onlyWhenDNDIsActiveSwitch = NO;
@@ -25,7 +26,14 @@ BOOL hideUnlockTextSwitch = YES;
 BOOL hideHomebarSwitch = YES;
 BOOL hidePageDotsSwitch = YES;
 BOOL disableTodaySwipeSwitch = NO;
-BOOL disableCameraSwipeSwitch = NO; 
+BOOL disableCameraSwipeSwitch = NO;
+BOOL blurredBackgroundSwitch = NO;
+BOOL tapToDismissLisaSwitch = YES;
+NSString* backgroundAlphaValue = @"1.0";
+
+// Animations
+BOOL lisaFadeOutAnimationSwitch = YES;
+NSString* lisaFadeOutAnimationValue = @"0.5";
 
 @interface CSCoverSheetViewController : UIViewController
 @end

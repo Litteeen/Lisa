@@ -309,4 +309,10 @@ UIImage* currentArtwork;
 
 }
 
+- (void)testBanner:(id)sender {
+
+    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)@"love.litten.lisa/TestBanner", nil, nil, true);
+
+}
+
 @end

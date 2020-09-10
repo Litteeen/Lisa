@@ -2,6 +2,7 @@
 
 BOOL enabled;
 BOOL enableCustomizationSection;
+BOOL enableAnimationsSection;
 
 // test notifications
 static BBServer* bbServer = nil;
@@ -77,6 +78,12 @@ void LSATestNotifications() {
 
 }
 
+void LSATestBanner() {
+
+    fakeNotification(@"com.apple.MobileSMS", [NSDate date], @"Hello, I'm Lisa", true);
+
+}
+
 %group Lisa
 
 %hook CSCoverSheetViewController
@@ -88,6 +95,7 @@ void LSATestNotifications() {
 	if (!lisaView) {
 		lisaView = [[UIView alloc] initWithFrame:[[self view] bounds]];
 		[lisaView setBackgroundColor:[UIColor blackColor]];
+        [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
 		[lisaView setHidden:YES];
 		if (![lisaView isDescendantOfView:[self view]]) [[self view] insertSubview:lisaView atIndex:0];
 	}
@@ -145,6 +153,29 @@ void LSATestNotifications() {
 
 %end
 
+%hook NCNotificationListView
+
+- (void)touchesBegan:(id)arg1 withEvent:(id)arg2 {
+
+    %orig;
+
+    if (!tapToDismissLisaSwitch) return;
+    if (lisaFadeOutAnimationSwitch) {
+        [UIView animateWithDuration:[lisaFadeOutAnimationValue doubleValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [lisaView setAlpha:0.0];
+        } completion:^(BOOL finished) {
+            [lisaView setHidden:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
+        }];
+    } else {
+        [lisaView setHidden:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
+    }
+
+}
+
+%end
+
 %hook SBBacklightController
 
 - (void)turnOnScreenFullyWithBacklightSource:(long long)arg1 { // show lisa based on user settings
@@ -154,14 +185,17 @@ void LSATestNotifications() {
     if (onlyWhenDNDIsActiveSwitch && isDNDActive) {
         if (whenNotificationArrivesSwitch && arg1 == 12) {
             [lisaView setHidden:NO];
+            [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else if (whenPlayingMusicSwitch && ([[%c(SBMediaController) sharedInstance] isPlaying] || [[%c(SBMediaController) sharedInstance] isPaused])) {
             [lisaView setHidden:NO];
+            [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else if (alwaysWhenNotificationsArePresentedSwitch && notificationCount > 0) {
             [lisaView setHidden:NO];
+            [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else {
@@ -172,14 +206,17 @@ void LSATestNotifications() {
     } else if (!onlyWhenDNDIsActiveSwitch) {
         if (whenNotificationArrivesSwitch && arg1 == 12) {
             [lisaView setHidden:NO];
+            [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else if (whenPlayingMusicSwitch && ([[%c(SBMediaController) sharedInstance] isPlaying] || [[%c(SBMediaController) sharedInstance] isPaused])) {
             [lisaView setHidden:NO];
+            [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else if (alwaysWhenNotificationsArePresentedSwitch && notificationCount > 0) {
             [lisaView setHidden:NO];
+            [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else {
@@ -538,6 +575,7 @@ void LSATestNotifications() {
 
     [preferences registerBool:&enabled default:nil forKey:@"Enabled"];
     [preferences registerBool:&enableCustomizationSection default:nil forKey:@"EnableCustomizationSection"];
+    [preferences registerBool:&enableAnimationsSection default:nil forKey:@"EnableAnimationsSection"];
 
     // Customization
     [preferences registerBool:&onlyWhenDNDIsActiveSwitch default:NO forKey:@"onlyWhenDNDIsActive"];
@@ -554,13 +592,21 @@ void LSATestNotifications() {
     [preferences registerBool:&hidePageDotsSwitch default:YES forKey:@"hidePageDots"];
     [preferences registerBool:&disableTodaySwipeSwitch default:NO forKey:@"disableTodaySwipe"];
     [preferences registerBool:&disableCameraSwipeSwitch default:NO forKey:@"disableCameraSwipe"];
+    [preferences registerBool:&blurredBackgroundSwitch default:NO forKey:@"blurredBackground"];
+    [preferences registerBool:&tapToDismissLisaSwitch default:YES forKey:@"tapToDismissLisa"];
+    [preferences registerObject:&backgroundAlphaValue default:@"1.0" forKey:@"backgroundAlpha"];
+
+    // Animations
+    [preferences registerBool:&lisaFadeOutAnimationSwitch default:YES forKey:@"lisaFadeOutAnimation"];
+    [preferences registerObject:&lisaFadeOutAnimationValue default:@"0.5" forKey:@"lisaFadeOutAnimation"];
 
     if (enabled) {
         %init(Lisa);
-        if (enableCustomizationSection) %init(LisaVisibility);
+        %init(LisaVisibility);
         if (onlyWhenDNDIsActiveSwitch || alwaysWhenNotificationsArePresentedSwitch) %init(LisaData);
         %init(TestNotifications);
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)LSATestNotifications, (CFStringRef)@"love.litten.lisa/TestNotifications", NULL, (CFNotificationSuspensionBehavior)kNilOptions);
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)LSATestBanner, (CFStringRef)@"love.litten.lisa/TestBanner", NULL, (CFNotificationSuspensionBehavior)kNilOptions);
         return;
     }
 
