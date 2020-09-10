@@ -5,6 +5,8 @@
 
 HBPreferences* preferences;
 UIView* lisaView;
+UIVisualEffectView* blurView;
+UIBlurEffect* blur;
 
 int notificationCount = 0;
 BOOL isDNDActive = NO;

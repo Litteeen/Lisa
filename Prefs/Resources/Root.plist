@@ -83,17 +83,17 @@
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>label</key>
-			<string>Test Banner</string>
+			<string>Test Notifications</string>
 			<key>action</key>
-			<string>testBanner:</string>
+			<string>testNotifications:</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>label</key>
-			<string>Test Notifications</string>
+			<string>Test Banner</string>
 			<key>action</key>
-			<string>testNotifications:</string>
+			<string>testBanner:</string>
 		</dict>
 
 		<dict>

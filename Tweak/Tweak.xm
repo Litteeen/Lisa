@@ -95,10 +95,21 @@ void LSATestBanner() {
 
 	if (!lisaView) {
 		lisaView = [[UIView alloc] initWithFrame:[[self view] bounds]];
+        [lisaView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 		[lisaView setBackgroundColor:[UIColor blackColor]];
         [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
 		[lisaView setHidden:YES];
 		if (![lisaView isDescendantOfView:[self view]]) [[self view] insertSubview:lisaView atIndex:0];
+	}
+
+	if (!blur && blurredBackgroundSwitch) {
+		blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+		blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
+		[blurView setFrame:[[self view] bounds]];
+		[blurView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+		[blurView setClipsToBounds:YES];
+        [blurView setHidden:YES];
+		if (![blurView isDescendantOfView:[self view]]) [[self view] insertSubview:blurView atIndex:0];
 	}
 
 }
@@ -108,6 +119,7 @@ void LSATestBanner() {
     %orig;
 
     [lisaView setHidden:YES];
+    [blurView setHidden:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
 
 }
@@ -164,8 +176,10 @@ void LSATestBanner() {
     if (lisaFadeOutAnimationSwitch) {
         [UIView animateWithDuration:[lisaFadeOutAnimationValue doubleValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [lisaView setAlpha:0.0];
+            [blurView setAlpha:0.0];
         } completion:^(BOOL finished) {
             [lisaView setHidden:YES];
+            [blurView setHidden:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
         }];
         if (enableHapticFeedbackSection && hapticFeedbackSwitch) {
@@ -175,6 +189,7 @@ void LSATestBanner() {
         }
     } else {
         [lisaView setHidden:YES];
+        [blurView setHidden:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
         if (enableHapticFeedbackSection && hapticFeedbackSwitch) {
             if ([hapticFeedbackStrengthValue intValue] == 0) AudioServicesPlaySystemSound(1519);
@@ -197,20 +212,27 @@ void LSATestBanner() {
         if (whenNotificationArrivesSwitch && arg1 == 12) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
+            [blurView setHidden:NO];
+            [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else if (whenPlayingMusicSwitch && ([[%c(SBMediaController) sharedInstance] isPlaying] || [[%c(SBMediaController) sharedInstance] isPaused])) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
+            [blurView setHidden:NO];
+            [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else if (alwaysWhenNotificationsArePresentedSwitch && notificationCount > 0) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
+            [blurView setHidden:NO];
+            [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else {
             [lisaView setHidden:YES];
+            [blurView setHidden:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
             return;
         }
@@ -218,20 +240,27 @@ void LSATestBanner() {
         if (whenNotificationArrivesSwitch && arg1 == 12) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
+            [blurView setHidden:NO];
+            [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else if (whenPlayingMusicSwitch && ([[%c(SBMediaController) sharedInstance] isPlaying] || [[%c(SBMediaController) sharedInstance] isPaused])) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
+            [blurView setHidden:NO];
+            [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else if (alwaysWhenNotificationsArePresentedSwitch && notificationCount > 0) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
+            [blurView setHidden:NO];
+            [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
             return;
         } else {
             [lisaView setHidden:YES];
+            [blurView setHidden:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
             return;
         }
