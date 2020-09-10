@@ -1,0 +1,9 @@
+Package: love.litten.lisa
+Name: Lisa
+Depends: mobilesubstrate, preferenceloader, ws.hbang.common (>= 1.14), firmware (>= 13.0)
+Version: 1.0
+Architecture: iphoneos-arm
+Description: owo
+Maintainer: alexandra
+Author: alexandra
+Section: Tweaks

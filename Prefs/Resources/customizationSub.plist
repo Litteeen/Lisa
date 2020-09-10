@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+
+        <dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Activate Lisa..</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>onlyWhenDNDIsActive</string>
+			<key>label</key>
+			<string>Only While DND Is Active</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>whenNotificationArrives</string>
+			<key>label</key>
+			<string>When Notification Arrives</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>alwaysWhenNotificationsArePresented</string>
+			<key>label</key>
+			<string>Always When Notifications Are Presented</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>whenPlayingMusic</string>
+			<key>label</key>
+			<string>When Playing Music</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Visibility</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hideStatusBar</string>
+			<key>label</key>
+			<string>Hide Status Bar</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hideControlCenterIndicator</string>
+			<key>label</key>
+			<string>Hide Control Center Indicator</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hideFaceIDLock</string>
+			<key>label</key>
+			<string>Hide FaceID Lock</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hideTimeAndDate</string>
+			<key>label</key>
+			<string>Hide Time And Date</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hideQuickActions</string>
+			<key>label</key>
+			<string>Hide Quick Actions</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hideUnlockText</string>
+			<key>label</key>
+			<string>Hide Unlock Text</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hideHomebar</string>
+			<key>label</key>
+			<string>Hide Homebar</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hidePageDots</string>
+			<key>label</key>
+			<string>Hide Page Dots</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Accessibility</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>disableTodaySwipe</string>
+			<key>label</key>
+			<string>Disable Today Swipe</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>disableCameraSwipe</string>
+			<key>label</key>
+			<string>Disable Camera Swipe</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
+
+	</array>
+	<key>title</key>
+	<string>Lisa</string>
+</dict>
+</plist>
