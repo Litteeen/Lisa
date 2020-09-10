@@ -290,10 +290,13 @@ void LSATestBanner() {
 %new
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide status bar
 
-	if ([notification.name isEqual:@"lisaHideElements"])
+	if ([notification.name isEqual:@"lisaHideElements"]) {
         [[self statusBar] setHidden:YES];
-	else if ([notification.name isEqual:@"lisaUnhideElements"])
-        [[self statusBar] setHidden:NO];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:[self statusBar] duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [[self statusBar] setHidden:NO];
+        } completion:nil];
+    }
 
 }
 
@@ -323,10 +326,13 @@ void LSATestBanner() {
 %new
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide faceid lock
 
-	if ([notification.name isEqual:@"lisaHideElements"])
+	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
-	else if ([notification.name isEqual:@"lisaUnhideElements"])
-        [self setHidden:NO];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
 
 }
 
@@ -356,10 +362,13 @@ void LSATestBanner() {
 %new
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide time and date
 
-	if ([notification.name isEqual:@"lisaHideElements"])
+	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
-	else if ([notification.name isEqual:@"lisaUnhideElements"])
-        [self setHidden:NO];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
 
 }
 
@@ -389,10 +398,13 @@ void LSATestBanner() {
 %new
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide quick actions
 
-	if ([notification.name isEqual:@"lisaHideElements"])
+	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
-	else if ([notification.name isEqual:@"lisaUnhideElements"])
-        [self setHidden:NO];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
 
 }
 
@@ -422,12 +434,14 @@ void LSATestBanner() {
 %new
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide control center indicator and or unlock text
 
-	if ([notification.name isEqual:@"lisaHideElements"]) {
+    if ([notification.name isEqual:@"lisaHideElements"]) {
         if (hideControlCenterIndicatorSwitch) [[self controlCenterGrabberContainerView] setHidden:YES];
         if (hideUnlockTextSwitch) [[self callToActionLabelContainerView] setHidden:YES];
     } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
-        if (hideControlCenterIndicatorSwitch) [[self controlCenterGrabberContainerView] setHidden:NO];
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            if (hideControlCenterIndicatorSwitch) [[self controlCenterGrabberContainerView] setHidden:NO];
         if (hideUnlockTextSwitch) [[self callToActionLabelContainerView] setHidden:NO];
+        } completion:nil];
     }
 
 }
@@ -458,10 +472,13 @@ void LSATestBanner() {
 %new
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide unlock text
 
-	if ([notification.name isEqual:@"lisaHideElements"])
+	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
-	else if ([notification.name isEqual:@"lisaUnhideElements"])
-        [self setHidden:NO];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
 
 }
 
@@ -491,10 +508,13 @@ void LSATestBanner() {
 %new
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
 
-	if ([notification.name isEqual:@"lisaHideElements"])
+	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
-	else if ([notification.name isEqual:@"lisaUnhideElements"])
-        [self setHidden:NO];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
 
 }
 
@@ -524,10 +544,13 @@ void LSATestBanner() {
 %new
 - (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
 
-	if ([notification.name isEqual:@"lisaHideElements"])
+	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
-	else if ([notification.name isEqual:@"lisaUnhideElements"])
-        [self setHidden:NO];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
 
 }
 
