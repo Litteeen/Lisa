@@ -75,6 +75,9 @@ void LSATestNotifications() {
         fakeNotification(@"com.apple.MobileSMS", [NSDate date], @"Hello, I'm Lisa", false);
         fakeNotification(@"com.apple.MobileSMS", [NSDate date], @"Hello, I'm Lisa", false);
         fakeNotification(@"com.apple.MobileSMS", [NSDate date], @"Hello, I'm Lisa", false);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            if (isDNDActive) [springboard _simulateHomeButtonPress];
+        });
     });
 
 }

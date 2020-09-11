@@ -164,4 +164,5 @@ NSString* hapticFeedbackStrengthValue = @"0";
 
 @interface SpringBoard : UIApplication
 - (void)_simulateLockButtonPress;
+- (void)_simulateHomeButtonPress;
 @end
