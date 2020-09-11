@@ -126,6 +126,18 @@ void LSATestBanner() {
 
 %end
 
+%hook SBIconController // quick fix for the status bar
+
+- (void)viewWillAppear:(BOOL)animated {
+
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
+
+	%orig;
+
+}
+
+%end
+
 %hook SBMainDisplayPolicyAggregator
 
 - (BOOL)_allowsCapabilityLockScreenTodayViewWithExplanation:(id *)arg1 { // disable today swipe
@@ -208,6 +220,7 @@ void LSATestBanner() {
 
 	%orig;
 
+    if (onlyWhileChargingSwitch && ![[%c(SBUIController) sharedInstance] isOnAC]) return;
     if (onlyWhenDNDIsActiveSwitch && isDNDActive) {
         if (whenNotificationArrivesSwitch && arg1 == 12) {
             [lisaView setHidden:NO];
@@ -748,6 +761,7 @@ void LSATestBanner() {
     [preferences registerBool:&whenNotificationArrivesSwitch default:YES forKey:@"whenNotificationArrives"];
     [preferences registerBool:&alwaysWhenNotificationsArePresentedSwitch default:YES forKey:@"alwaysWhenNotificationsArePresented"];
     [preferences registerBool:&whenPlayingMusicSwitch default:YES forKey:@"whenPlayingMusic"];
+    [preferences registerBool:&onlyWhileChargingSwitch default:NO forKey:@"onlyWhileCharging"];
     [preferences registerBool:&hideStatusBarSwitch default:YES forKey:@"hideStatusBar"];
     [preferences registerBool:&hideControlCenterIndicatorSwitch default:YES forKey:@"hideControlCenterIndicator"];
     [preferences registerBool:&hideFaceIDLockSwitch default:YES forKey:@"hideFaceIDLock"];

@@ -21,6 +21,7 @@ BOOL onlyWhenDNDIsActiveSwitch = NO;
 BOOL whenNotificationArrivesSwitch = YES;
 BOOL alwaysWhenNotificationsArePresentedSwitch = YES;
 BOOL whenPlayingMusicSwitch = YES;
+BOOL onlyWhileChargingSwitch = NO;
 BOOL hideStatusBarSwitch = YES;
 BOOL hideControlCenterIndicatorSwitch = YES;
 BOOL hideFaceIDLockSwitch = YES;
@@ -118,6 +119,11 @@ NSString* hapticFeedbackStrengthValue = @"0";
 @interface SBMediaController : NSObject
 + (id)sharedInstance;
 - (BOOL)isPlaying;
+@end
+
+@interface SBUIController : NSObject
++ (id)sharedInstance;
+- (BOOL)isOnAC;
 @end
 
 // test notifications
