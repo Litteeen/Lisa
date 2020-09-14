@@ -34,6 +34,7 @@ BOOL hidePageDotsSwitch = YES;
 BOOL hideComplicationsSwitch = YES;
 BOOL hideKaiSwitch = YES;
 BOOL hideAperioSwitch = YES;
+BOOL hideLibellumSwitch = YES;
 
 BOOL disableTodaySwipeSwitch = NO;
 BOOL disableCameraSwipeSwitch = NO;
@@ -110,6 +111,11 @@ NSString* hapticFeedbackStrengthValue = @"0";
 
 // aperio
 @interface APEPlatter : UIView
+- (void)receiveHideNotification:(NSNotification *)notification;
+@end
+
+// libellum
+@interface LibellumView : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 

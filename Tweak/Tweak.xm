@@ -688,6 +688,42 @@ void LSATestBanner() {
 
 %end
 
+%hook LibellumView
+
+- (id)initWithFrame:(CGRect)frame { // add notification observer
+
+    if (hideLibellumSwitch) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaHideElements" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaUnhideElements" object:nil];
+    }
+
+	return %orig;
+
+}
+
+%new
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+
+	if ([notification.name isEqual:@"lisaHideElements"]) {
+        [self setHidden:YES];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
+
+}
+
+- (void)dealloc { // remove observer
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+	%orig;
+
+}
+
+%end
+
 %end
 
 %group LisaData
@@ -777,6 +813,7 @@ void LSATestBanner() {
     [preferences registerBool:&hideComplicationsSwitch default:YES forKey:@"hideComplications"];
     [preferences registerBool:&hideKaiSwitch default:YES forKey:@"hideKai"];
     [preferences registerBool:&hideAperioSwitch default:YES forKey:@"hideAperio"];
+    [preferences registerBool:&hideLibellumSwitch default:YES forKey:@"hideLibellum"];
 
     [preferences registerBool:&disableTodaySwipeSwitch default:NO forKey:@"disableTodaySwipe"];
     [preferences registerBool:&disableCameraSwipeSwitch default:NO forKey:@"disableCameraSwipe"];
