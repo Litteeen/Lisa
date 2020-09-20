@@ -35,6 +35,7 @@ BOOL hideComplicationsSwitch = YES;
 BOOL hideKaiSwitch = YES;
 BOOL hideAperioSwitch = YES;
 BOOL hideLibellumSwitch = YES;
+BOOL hideVezaSwitch = YES;
 
 BOOL disableTodaySwipeSwitch = NO;
 BOOL disableCameraSwipeSwitch = NO;
@@ -116,6 +117,11 @@ NSString* hapticFeedbackStrengthValue = @"0";
 
 // libellum
 @interface LibellumView : UIView
+- (void)receiveHideNotification:(NSNotification *)notification;
+@end
+
+// Veza
+@interface VezaView : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 

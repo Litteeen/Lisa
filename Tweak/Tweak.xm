@@ -724,6 +724,42 @@ void LSATestBanner() {
 
 %end
 
+%hook VezaView
+
+- (id)initWithFrame:(CGRect)frame { // add notification observer
+
+    if (hideVezaSwitch) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaHideElements" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaUnhideElements" object:nil];
+    }
+
+	return %orig;
+
+}
+
+%new
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+
+	if ([notification.name isEqual:@"lisaHideElements"]) {
+        [self setHidden:YES];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
+
+}
+
+- (void)dealloc { // remove observer
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+	%orig;
+
+}
+
+%end
+
 %end
 
 %group LisaData
@@ -814,6 +850,7 @@ void LSATestBanner() {
     [preferences registerBool:&hideKaiSwitch default:YES forKey:@"hideKai"];
     [preferences registerBool:&hideAperioSwitch default:YES forKey:@"hideAperio"];
     [preferences registerBool:&hideLibellumSwitch default:YES forKey:@"hideLibellum"];
+    [preferences registerBool:&hideVezaSwitch default:YES forKey:@"hideVeza"];
 
     [preferences registerBool:&disableTodaySwipeSwitch default:NO forKey:@"disableTodaySwipe"];
     [preferences registerBool:&disableCameraSwipeSwitch default:NO forKey:@"disableCameraSwipe"];
@@ -831,6 +868,7 @@ void LSATestBanner() {
 
     if (enabled) {
         %init(Lisa);
+        if (hideVezaSwitch && [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/Veza.dylib"]) dlopen("/Library/MobileSubstrate/DynamicLibraries/Veza.dylib", RTLD_NOW);
         %init(LisaVisibility);
         if (onlyWhenDNDIsActiveSwitch || alwaysWhenNotificationsArePresentedSwitch) %init(LisaData);
         %init(TestNotifications);
