@@ -225,12 +225,13 @@ void LSATestBanner() {
 
     if (onlyWhileChargingSwitch && ![[%c(SBUIController) sharedInstance] isOnAC]) return;
     if (onlyWhenDNDIsActiveSwitch && isDNDActive) {
-        if (whenNotificationArrivesSwitch && arg1 == 12) {
+        if (whenNotificationArrivesSwitch && arg1 == 12 && !screenIsOn) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [blurView setHidden:NO];
             [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
+            screenIsOn = YES;
             return;
         } else if (whenPlayingMusicSwitch && [[%c(SBMediaController) sharedInstance] isPlaying]) {
             [lisaView setHidden:NO];
@@ -238,6 +239,7 @@ void LSATestBanner() {
             [blurView setHidden:NO];
             [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
+            screenIsOn = YES;
             return;
         } else if (alwaysWhenNotificationsArePresentedSwitch && notificationCount > 0) {
             [lisaView setHidden:NO];
@@ -245,20 +247,23 @@ void LSATestBanner() {
             [blurView setHidden:NO];
             [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
+            screenIsOn = YES;
             return;
         } else {
             [lisaView setHidden:YES];
             [blurView setHidden:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
+            screenIsOn = YES;
             return;
         }
     } else if (!onlyWhenDNDIsActiveSwitch) {
-        if (whenNotificationArrivesSwitch && arg1 == 12) {
+        if (whenNotificationArrivesSwitch && arg1 == 12 && !screenIsOn) {
             [lisaView setHidden:NO];
             [lisaView setAlpha:[backgroundAlphaValue doubleValue]];
             [blurView setHidden:NO];
             [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
+            screenIsOn = YES;
             return;
         } else if (whenPlayingMusicSwitch && [[%c(SBMediaController) sharedInstance] isPlaying]) {
             [lisaView setHidden:NO];
@@ -266,6 +271,7 @@ void LSATestBanner() {
             [blurView setHidden:NO];
             [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
+            screenIsOn = YES;
             return;
         } else if (alwaysWhenNotificationsArePresentedSwitch && notificationCount > 0) {
             [lisaView setHidden:NO];
@@ -273,14 +279,28 @@ void LSATestBanner() {
             [blurView setHidden:NO];
             [blurView setAlpha:1.0];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaHideElements" object:nil];
+            screenIsOn = YES;
             return;
         } else {
             [lisaView setHidden:YES];
             [blurView setHidden:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"lisaUnhideElements" object:nil];
+            screenIsOn = YES;
             return;
         }
     }
+
+}
+
+%end
+
+%hook SBLockScreenManager
+
+- (void)lockUIFromSource:(int)arg1 withOptions:(id)arg2 completion:(id)arg3 { // note when screen turned off
+
+    %orig;
+
+    screenIsOn = NO;
 
 }
 
