@@ -10,7 +10,6 @@ UIBlurEffect* blur;
 
 int notificationCount = 0;
 BOOL isDNDActive = NO;
-BOOL screenIsOn = NO;
 
 extern BOOL enabled;
 extern BOOL enableCustomizationSection;
