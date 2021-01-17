@@ -456,7 +456,7 @@ void LSATestBanner() {
     } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
         [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             if (hideControlCenterIndicatorSwitch) [[self controlCenterGrabberContainerView] setHidden:NO];
-        if (hideUnlockTextSwitch) [[self callToActionLabelContainerView] setHidden:NO];
+            if (hideUnlockTextSwitch) [[self callToActionLabelContainerView] setHidden:NO];
         } completion:nil];
     }
 
@@ -770,7 +770,7 @@ void LSATestBanner() {
 
     notificationCount = %orig;
 
-    return %orig;
+    return notificationCount;
 
 }
 
@@ -782,7 +782,7 @@ void LSATestBanner() {
 
     isDNDActive = %orig;
 
-    return %orig;
+    return isDNDActive;
 
 }
 
