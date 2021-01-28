@@ -1,7 +1,6 @@
-#import <UIKit/UIKit.h>
-#import <Cephei/HBPreferences.h>
 #import <AudioToolbox/AudioServices.h>
 #import <dlfcn.h>
+#import <Cephei/HBPreferences.h>
 
 HBPreferences* preferences;
 UIView* lisaView;
