@@ -9,9 +9,6 @@ Customize your lockscreen experience
   - No dependencies
   - You may want to edit the `Makefiles` to suit your theos installation
 
-## Contributions
-How to contribute: you don't
-
 ## Note
 If you take code from this repository please link it, or my [twitter](https://twitter.com/Litteeen) to your project  
 You may not redistribute this source code or packages from it  
