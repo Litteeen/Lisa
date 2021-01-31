@@ -1,3 +1,4 @@
+#import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioServices.h>
 #import <dlfcn.h>
 #import <Cephei/HBPreferences.h>

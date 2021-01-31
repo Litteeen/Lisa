@@ -26,7 +26,7 @@ UIImage* currentArtwork;
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,10,10)];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.titleLabel.text = @"1.3.5";
+        self.titleLabel.text = @"1.3.6";
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem.titleView addSubview:self.titleLabel];
@@ -247,9 +247,7 @@ UIImage* currentArtwork;
 - (void)resetPreferences {
 
     HBPreferences* preferences = [[HBPreferences alloc] initWithIdentifier: @"love.litten.lisapreferences"];
-    for (NSString* key in [preferences dictionaryRepresentation]) {
-        [preferences removeObjectForKey:key];
-    }
+    [preferences removeAllObjects];
     
     [[self enableSwitch] setOn:NO animated: YES];
     [self respring];
@@ -273,13 +271,12 @@ UIImage* currentArtwork;
 }
 
 - (void)respringUtil {
-
-    pid_t pid;
-    const char* args[] = {"killall", "backboardd", NULL};
+    
+    NSTask* task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/usr/bin/sbreload"];
+    [task launch];
 
     [HBRespringController respringAndReturnTo:[NSURL URLWithString:@"prefs:root=Lisa"]];
-
-    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char *const *)args, NULL);
 
 }
 

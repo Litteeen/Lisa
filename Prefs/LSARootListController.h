@@ -1,11 +1,9 @@
-#import <UIKit/UIKit.h>
 #import <Preferences/PSListController.h>
 #import <Preferences/PSSpecifier.h>
 #import <CepheiPrefs/HBRootListController.h>
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Cephei/HBPreferences.h>
 #import <Cephei/HBRespringController.h>
-#import <spawn.h>
 #import <Preferences/PSControlTableCell.h>
 #import <Preferences/PSEditableTableCell.h>
 
@@ -29,6 +27,11 @@
 - (void)setCellForRowAtIndexPath:(NSIndexPath *)indexPath enabled:(BOOL)enabled;
 - (void)testNotifications:(id)sender;
 - (void)testBanner:(id)sender;
+@end
+
+@interface NSTask : NSObject
+@property(copy)NSString* launchPath;
+- (void)launch;
 @end
 
 @interface PSEditableTableCell (Interface)
