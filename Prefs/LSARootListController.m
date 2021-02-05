@@ -274,9 +274,10 @@ UIImage* currentArtwork;
     
     NSTask* task = [[NSTask alloc] init];
     [task setLaunchPath:@"/usr/bin/sbreload"];
-    [task launch];
 
     [HBRespringController respringAndReturnTo:[NSURL URLWithString:@"prefs:root=Lisa"]];
+
+    [task launch];
 
 }
 
