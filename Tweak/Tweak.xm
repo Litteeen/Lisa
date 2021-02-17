@@ -316,14 +316,6 @@ void LSATestBanner() {
 
 }
 
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
-
-}
-
 %end
 
 %hook SBUIProudLockIconView
@@ -349,14 +341,6 @@ void LSATestBanner() {
             [self setHidden:NO];
         } completion:nil];
     }
-
-}
-
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
 
 }
 
@@ -388,14 +372,6 @@ void LSATestBanner() {
 
 }
 
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
-
-}
-
 %end
 
 %hook CSQuickActionsButton
@@ -421,14 +397,6 @@ void LSATestBanner() {
             [self setHidden:NO];
         } completion:nil];
     }
-
-}
-
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
 
 }
 
@@ -462,14 +430,6 @@ void LSATestBanner() {
 
 }
 
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
-
-}
-
 %end
 
 %hook SBUICallToActionLabel
@@ -495,14 +455,6 @@ void LSATestBanner() {
             [self setHidden:NO];
         } completion:nil];
     }
-
-}
-
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
 
 }
 
@@ -534,14 +486,6 @@ void LSATestBanner() {
 
 }
 
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
-
-}
-
 %end
 
 %hook CSPageControl
@@ -558,7 +502,7 @@ void LSATestBanner() {
 }
 
 %new
-- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide page dots
 
 	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
@@ -567,14 +511,6 @@ void LSATestBanner() {
             [self setHidden:NO];
         } completion:nil];
     }
-
-}
-
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
 
 }
 
@@ -594,7 +530,7 @@ void LSATestBanner() {
 }
 
 %new
-- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide complications
 
 	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
@@ -603,14 +539,6 @@ void LSATestBanner() {
             [self setHidden:NO];
         } completion:nil];
     }
-
-}
-
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
 
 }
 
@@ -630,7 +558,7 @@ void LSATestBanner() {
 }
 
 %new
-- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide kai
 
 	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
@@ -639,14 +567,6 @@ void LSATestBanner() {
             [self setHidden:NO];
         } completion:nil];
     }
-
-}
-
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
 
 }
 
@@ -666,7 +586,7 @@ void LSATestBanner() {
 }
 
 %new
-- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide aperio
 
 	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
@@ -675,14 +595,6 @@ void LSATestBanner() {
             [self setHidden:NO];
         } completion:nil];
     }
-
-}
-
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
 
 }
 
@@ -702,7 +614,7 @@ void LSATestBanner() {
 }
 
 %new
-- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide lebellum
 
 	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
@@ -711,14 +623,6 @@ void LSATestBanner() {
             [self setHidden:NO];
         } completion:nil];
     }
-
-}
-
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
 
 }
 
@@ -738,7 +642,7 @@ void LSATestBanner() {
 }
 
 %new
-- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide homebar
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide veza
 
 	if ([notification.name isEqual:@"lisaHideElements"]) {
         [self setHidden:YES];
@@ -750,11 +654,31 @@ void LSATestBanner() {
 
 }
 
-- (void)dealloc { // remove observer
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-	%orig;
+%end
+
+%hook AXNView
+
+- (id)initWithFrame:(CGRect)frame { // add notification observer
+
+    if (hideVezaSwitch) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaHideElements" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveHideNotification:) name:@"lisaUnhideElements" object:nil];
+    }
+
+	return %orig;
+
+}
+
+%new
+- (void)receiveHideNotification:(NSNotification *)notification { // receive notification and hide or unhide axon
+
+	if ([notification.name isEqual:@"lisaHideElements"]) {
+        [self setHidden:YES];
+    } else if ([notification.name isEqual:@"lisaUnhideElements"]) {
+        [UIView transitionWithView:self duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self setHidden:NO];
+        } completion:nil];
+    }
 
 }
 
@@ -832,43 +756,53 @@ void LSATestBanner() {
     [preferences registerBool:&enableHapticFeedbackSection default:nil forKey:@"EnableHapticFeedbackSection"];
 
     // Customization
-    [preferences registerBool:&onlyWhenDNDIsActiveSwitch default:NO forKey:@"onlyWhenDNDIsActive"];
-    [preferences registerBool:&whenNotificationArrivesSwitch default:YES forKey:@"whenNotificationArrives"];
-    [preferences registerBool:&alwaysWhenNotificationsArePresentedSwitch default:YES forKey:@"alwaysWhenNotificationsArePresented"];
-    [preferences registerBool:&whenPlayingMusicSwitch default:YES forKey:@"whenPlayingMusic"];
-    [preferences registerBool:&onlyWhileChargingSwitch default:NO forKey:@"onlyWhileCharging"];
-    [preferences registerBool:&hideStatusBarSwitch default:YES forKey:@"hideStatusBar"];
-    [preferences registerBool:&hideControlCenterIndicatorSwitch default:YES forKey:@"hideControlCenterIndicator"];
-    [preferences registerBool:&hideFaceIDLockSwitch default:YES forKey:@"hideFaceIDLock"];
-    [preferences registerBool:&hideTimeAndDateSwitch default:YES forKey:@"hideTimeAndDate"];
-    [preferences registerBool:&hideQuickActionsSwitch default:YES forKey:@"hideQuickActions"];
-    [preferences registerBool:&hideUnlockTextSwitch default:YES forKey:@"hideUnlockText"];
-    [preferences registerBool:&hideHomebarSwitch default:YES forKey:@"hideHomebar"];
-    [preferences registerBool:&hidePageDotsSwitch default:YES forKey:@"hidePageDots"];
-
-    [preferences registerBool:&hideComplicationsSwitch default:YES forKey:@"hideComplications"];
-    [preferences registerBool:&hideKaiSwitch default:YES forKey:@"hideKai"];
-    [preferences registerBool:&hideAperioSwitch default:YES forKey:@"hideAperio"];
-    [preferences registerBool:&hideLibellumSwitch default:YES forKey:@"hideLibellum"];
-    [preferences registerBool:&hideVezaSwitch default:YES forKey:@"hideVeza"];
-
-    [preferences registerBool:&disableTodaySwipeSwitch default:NO forKey:@"disableTodaySwipe"];
-    [preferences registerBool:&disableCameraSwipeSwitch default:NO forKey:@"disableCameraSwipe"];
-    [preferences registerBool:&blurredBackgroundSwitch default:NO forKey:@"blurredBackground"];
-    [preferences registerBool:&tapToDismissLisaSwitch default:YES forKey:@"tapToDismissLisa"];
-    [preferences registerObject:&backgroundAlphaValue default:@"1.0" forKey:@"backgroundAlpha"];
+    if (enableCustomizationSection) {
+        [preferences registerBool:&onlyWhenDNDIsActiveSwitch default:NO forKey:@"onlyWhenDNDIsActive"];
+        [preferences registerBool:&whenNotificationArrivesSwitch default:YES forKey:@"whenNotificationArrives"];
+        [preferences registerBool:&alwaysWhenNotificationsArePresentedSwitch default:YES forKey:@"alwaysWhenNotificationsArePresented"];
+        [preferences registerBool:&whenPlayingMusicSwitch default:YES forKey:@"whenPlayingMusic"];
+        [preferences registerBool:&onlyWhileChargingSwitch default:NO forKey:@"onlyWhileCharging"];
+        [preferences registerBool:&hideStatusBarSwitch default:YES forKey:@"hideStatusBar"];
+        [preferences registerBool:&hideControlCenterIndicatorSwitch default:YES forKey:@"hideControlCenterIndicator"];
+        [preferences registerBool:&hideFaceIDLockSwitch default:YES forKey:@"hideFaceIDLock"];
+        [preferences registerBool:&hideTimeAndDateSwitch default:YES forKey:@"hideTimeAndDate"];
+        [preferences registerBool:&hideQuickActionsSwitch default:YES forKey:@"hideQuickActions"];
+        [preferences registerBool:&hideUnlockTextSwitch default:YES forKey:@"hideUnlockText"];
+        [preferences registerBool:&hideHomebarSwitch default:YES forKey:@"hideHomebar"];
+        [preferences registerBool:&hidePageDotsSwitch default:YES forKey:@"hidePageDots"];
+        [preferences registerBool:&hideComplicationsSwitch default:YES forKey:@"hideComplications"];
+        [preferences registerBool:&hideKaiSwitch default:YES forKey:@"hideKai"];
+        [preferences registerBool:&hideAperioSwitch default:YES forKey:@"hideAperio"];
+        [preferences registerBool:&hideLibellumSwitch default:YES forKey:@"hideLibellum"];
+        [preferences registerBool:&hideVezaSwitch default:YES forKey:@"hideVeza"];
+        [preferences registerBool:&hideAxonSwitch default:YES forKey:@"hideAxon"];
+        [preferences registerBool:&disableTodaySwipeSwitch default:NO forKey:@"disableTodaySwipe"];
+        [preferences registerBool:&disableCameraSwipeSwitch default:NO forKey:@"disableCameraSwipe"];
+        [preferences registerBool:&blurredBackgroundSwitch default:NO forKey:@"blurredBackground"];
+        [preferences registerBool:&tapToDismissLisaSwitch default:YES forKey:@"tapToDismissLisa"];
+        [preferences registerObject:&backgroundAlphaValue default:@"1.0" forKey:@"backgroundAlpha"];
+    }
 
     // Animations
-    [preferences registerBool:&lisaFadeOutAnimationSwitch default:YES forKey:@"lisaFadeOutAnimation"];
-    [preferences registerObject:&lisaFadeOutAnimationValue default:@"0.5" forKey:@"lisaFadeOutAnimation"];
+    if (enableAnimationsSection) {
+        [preferences registerBool:&lisaFadeOutAnimationSwitch default:YES forKey:@"lisaFadeOutAnimation"];
+        [preferences registerObject:&lisaFadeOutAnimationValue default:@"0.5" forKey:@"lisaFadeOutAnimation"];
+    }
 
     // Haptic Feedback
-    [preferences registerBool:&hapticFeedbackSwitch default:NO forKey:@"hapticFeedback"];
-    [preferences registerObject:&hapticFeedbackStrengthValue default:@"0" forKey:@"hapticFeedbackStrength"];
+    if (enableHapticFeedbackSection) {
+        [preferences registerBool:&hapticFeedbackSwitch default:NO forKey:@"hapticFeedback"];
+        [preferences registerObject:&hapticFeedbackStrengthValue default:@"0" forKey:@"hapticFeedbackStrength"];
+    }
 
     if (enabled) {
         %init(Lisa);
+        if (hideComplicationsSwitch && [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/Complications.dylib"]) dlopen("/Library/MobileSubstrate/DynamicLibraries/Complications.dylib", RTLD_NOW);
+        if (hideKaiSwitch && [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/Kai.dylib"]) dlopen("/Library/MobileSubstrate/DynamicLibraries/Kai.dylib", RTLD_NOW);
+        if (hideAperioSwitch && [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/Aperio.dylib"]) dlopen("/Library/MobileSubstrate/DynamicLibraries/Aperio.dylib", RTLD_NOW);
+        if (hideLibellumSwitch && [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/Libellum.dylib"]) dlopen("/Library/MobileSubstrate/DynamicLibraries/Libellum.dylib", RTLD_NOW);
         if (hideVezaSwitch && [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/Veza.dylib"]) dlopen("/Library/MobileSubstrate/DynamicLibraries/Veza.dylib", RTLD_NOW);
+        if (hideAxonSwitch && [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/Axon.dylib"]) dlopen("/Library/MobileSubstrate/DynamicLibraries/Axon.dylib", RTLD_NOW);
         %init(LisaVisibility);
         if (onlyWhenDNDIsActiveSwitch || alwaysWhenNotificationsArePresentedSwitch) %init(LisaData);
         %init(TestNotifications);

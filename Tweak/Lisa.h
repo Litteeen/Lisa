@@ -30,13 +30,12 @@ BOOL hideQuickActionsSwitch = YES;
 BOOL hideUnlockTextSwitch = YES;
 BOOL hideHomebarSwitch = YES;
 BOOL hidePageDotsSwitch = YES;
-
 BOOL hideComplicationsSwitch = YES;
 BOOL hideKaiSwitch = YES;
 BOOL hideAperioSwitch = YES;
 BOOL hideLibellumSwitch = YES;
 BOOL hideVezaSwitch = YES;
-
+BOOL hideAxonSwitch = YES;
 BOOL disableTodaySwipeSwitch = NO;
 BOOL disableCameraSwipeSwitch = NO;
 BOOL blurredBackgroundSwitch = NO;
@@ -54,17 +53,14 @@ NSString* hapticFeedbackStrengthValue = @"0";
 @interface CSCoverSheetViewController : UIViewController
 @end
 
-// time and date
 @interface SBFLockScreenDateView : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// faceid lock
 @interface SBUIProudLockIconView : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// status bar
 @interface _UIStatusBar : UIView
 @end
 
@@ -73,55 +69,49 @@ NSString* hapticFeedbackStrengthValue = @"0";
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// quick actions
 @interface CSQuickActionsButton : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// control center indicator and unlock text for homebar devices
 @interface CSTeachableMomentsContainerView : UIView
 @property(nonatomic, strong, readwrite)UIView* controlCenterGrabberContainerView;
 @property(nonatomic, retain)UIView* callToActionLabelContainerView;
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// unlock text for home button devices
 @interface SBUICallToActionLabel : UILabel
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// homebar
 @interface CSHomeAffordanceView : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// page dots
 @interface CSPageControl : UIPageControl
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// complications
 @interface ComplicationsView : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// kai
 @interface KAIBatteryPlatter : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// aperio
 @interface APEPlatter : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// libellum
 @interface LibellumView : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
-// Veza
 @interface VezaView : UIView
+- (void)receiveHideNotification:(NSNotification *)notification;
+@end
+
+@interface AXNView : UIView
 - (void)receiveHideNotification:(NSNotification *)notification;
 @end
 
