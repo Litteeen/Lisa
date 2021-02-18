@@ -8,6 +8,7 @@ UIView* lisaView;
 UIVisualEffectView* blurView;
 UIBlurEffect* blur;
 
+BOOL isScreenOn = NO;
 int notificationCount = 0;
 BOOL isDNDActive = NO;
 
@@ -116,6 +117,11 @@ NSString* hapticFeedbackStrengthValue = @"0";
 @end
 
 @interface SBUILegibilityLabel : UIView
+@end
+
+@interface SBLockScreenManager : NSObject
++ (id)sharedInstance;
+- (BOOL)isLockScreenVisible;
 @end
 
 @interface SBMediaController : NSObject

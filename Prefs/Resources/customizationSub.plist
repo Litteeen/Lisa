@@ -277,6 +277,20 @@
 			<key>PostNotification</key>
 			<string>love.litten.lisapreferences/ReloadPrefs</string>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>love.litten.lisapreferences</string>
+			<key>key</key>
+			<string>hideAxon</string>
+			<key>label</key>
+			<string>Hide Axon</string>
+			<key>PostNotification</key>
+			<string>love.litten.lisapreferences/ReloadPrefs</string>
+		</dict>
 
 		<dict>
 			<key>cell</key>

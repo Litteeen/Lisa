@@ -223,6 +223,10 @@ void LSATestBanner() {
 
 	%orig;
 
+    if (isScreenOn) return;
+    isScreenOn = YES;
+
+    if (![[%c(SBLockScreenManager) sharedInstance] isLockScreenVisible]) return;
     if (onlyWhileChargingSwitch && ![[%c(SBUIController) sharedInstance] isOnAC]) return;
     if (onlyWhenDNDIsActiveSwitch && isDNDActive) {
         if (whenNotificationArrivesSwitch && arg1 == 12) {
@@ -281,6 +285,18 @@ void LSATestBanner() {
             return;
         }
     }
+
+}
+
+%end
+
+%hook SBLockScreenManager
+
+- (void)lockUIFromSource:(int)arg1 withOptions:(id)arg2 { // stop timer when device was locked
+
+	%orig;
+
+    isScreenOn = NO;
 
 }
 

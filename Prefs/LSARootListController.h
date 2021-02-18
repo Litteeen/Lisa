@@ -4,8 +4,6 @@
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Cephei/HBPreferences.h>
 #import <Cephei/HBRespringController.h>
-#import <Preferences/PSControlTableCell.h>
-#import <Preferences/PSEditableTableCell.h>
 
 @interface LSAAppearanceSettings : HBAppearanceSettings
 @end
@@ -24,7 +22,6 @@
 - (void)resetPreferences;
 - (void)respring;
 - (void)respringUtil;
-- (void)setCellForRowAtIndexPath:(NSIndexPath *)indexPath enabled:(BOOL)enabled;
 - (void)testNotifications:(id)sender;
 - (void)testBanner:(id)sender;
 @end
@@ -32,8 +29,4 @@
 @interface NSTask : NSObject
 @property(copy)NSString* launchPath;
 - (void)launch;
-@end
-
-@interface PSEditableTableCell (Interface)
-- (id)textField;
 @end
