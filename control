@@ -5,7 +5,7 @@ Version: 1.4
 Architecture: iphoneos-arm
 Description: Full incoming OLED notifications
 Maintainer: Litten
-Author: Litten
+Author: Litten & Esquilli
 Section: Tweaks
 Depiction: https://repo.litten.love/depictions/lsa/index.html
 SileoDepiction: https://repo.litten.love/depictions/lsa/lsa.json
