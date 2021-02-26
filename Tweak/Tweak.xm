@@ -292,7 +292,7 @@ void LSATestBanner() {
 
 %hook SBLockScreenManager
 
-- (void)lockUIFromSource:(int)arg1 withOptions:(id)arg2 { // stop timer when device was locked
+- (void)lockUIFromSource:(int)arg1 withOptions:(id)arg2 { // notice when screen turned off
 
 	%orig;
 
