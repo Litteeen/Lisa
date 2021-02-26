@@ -23,7 +23,26 @@
             <key>user</key>
             <string>NepetaDev</string>
         </dict>
-        
+
+        <dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Icon By</string>
+		</dict>
+		<dict>
+            <key>cell</key>
+            <string>PSButtonCell</string>
+            <key>label</key>
+            <string>@74k1_</string>
+            <key>cellClass</key>
+            <string>HBTwitterCell</string>
+            <key>label</key>
+            <string>taki</string>
+            <key>user</key>
+            <string>74k1_</string>
+        </dict>
+
         <dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -61,26 +80,6 @@
             <key>user</key>
             <string>arm64e</string>
         </dict>
-
-        <dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>Icon By</string>
-		</dict>
-		<dict>
-            <key>cell</key>
-            <string>PSButtonCell</string>
-            <key>label</key>
-            <string>@74k1_</string>
-            <key>cellClass</key>
-            <string>HBTwitterCell</string>
-            <key>label</key>
-            <string>taki</string>
-            <key>user</key>
-            <string>74k1_</string>
-        </dict>
-		
 
 	</array>
 	<key>title</key>
